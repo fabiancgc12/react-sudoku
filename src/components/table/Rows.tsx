@@ -6,7 +6,7 @@ type RowsType = {
 }
 
 export function Rows({row}:RowsType){
-    return <div>
-        {row.map((cell,columnIndex) => <CellTable cell={cell} key={`cell-${cell.box}`}/>)}
+    return <div className="grid grid-cols-9 w-full h-full">
+        {row.map((cell) => <CellTable cell={cell} key={`cell-${cell.box}`}/>)}
     </div>
 }
