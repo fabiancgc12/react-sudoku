@@ -1,4 +1,4 @@
-import {Cell} from "../table/Cell";
+import {Cell} from "@/utils/table/Cell";
 
 declare namespace sudoku {
     function generate(dif:difficultyEnum|number): string;

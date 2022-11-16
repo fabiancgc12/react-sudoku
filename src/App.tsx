@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {difficultyEnum, generateGame} from "./utils/generator/generateGame";
-import {Cell} from "./utils/table/Cell";
+import {Cell} from "@/utils/table/Cell";
 
 function renderRow(row:Cell[]){
     return row.map(c => <span>{c.value}</span>)
