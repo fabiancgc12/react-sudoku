@@ -7,7 +7,9 @@ type CellTableType = {
 export function CellTable({cell}:CellTableType){
     const extraBorder = getBorderSize(cell)
     return (
-    <span className={`grid place-items-center font-bold text-xl text-slate-200 bg-stone-800 border border-black ${extraBorder}`}>
+    <span
+        className={`grid place-items-center cursor-pointer font-bold text-xl text-slate-200 bg-stone-800 border border-black ${extraBorder}
+        hover:bg-cyan-900 hover:text-cyan-500`}>
         {cell.value}
     </span>)
 }
