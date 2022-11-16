@@ -4,17 +4,17 @@ import {Rows} from "@/components/table/Rows";
 
 
 function App() {
-  const [count,setCount] = useState(0)
-  const game = generateGame(difficultyEnum.easy)
+  const [game,setGame] = useState(generateGame(difficultyEnum.easy));
+  const onClick = () => {
+      setGame(generateGame(difficultyEnum.easy))
+  }
+  console.log(game)
   return (
       <div>
-          <h1 className="text-3xl font-bold underline">
-              Hello world!
-          </h1>
-          <div>
+          <div className={""}>
               {game.map((row,rowIndex) => <Rows row={row} key={`key-${rowIndex}`}/>)}
           </div>
-        <button onClick={() => setCount(count+1)}>new</button>
+        <button onClick={onClick}>new</button>
       </div>
   )
 }
