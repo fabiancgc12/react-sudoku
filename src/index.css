@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+Creating styles for the 9x9 boxes
+ */
+
+.tableRow:nth-child(1) .tableCell{
+    @apply border-t-2 border-black
+}
+
+.tableRow:nth-child(3n) .tableCell{
+    @apply border-b-2 border-black
+}
+
+.tableRow .tableCell:nth-child(1){
+    @apply border-l-2 border-black
+}
+
+.tableRow .tableCell:nth-child(3n){
+    @apply border-r-2 border-black
+}
