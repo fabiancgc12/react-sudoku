@@ -11,6 +11,9 @@ function App() {
   const game = generateGame(difficultyEnum.easy)
   return (
       <div>
+          <h1 className="text-3xl font-bold underline">
+              Hello world!
+          </h1>
           <div>
               {game.map(renderRow)}
           </div>
