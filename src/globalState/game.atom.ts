@@ -1,6 +1,7 @@
 import {atom} from "jotai";
 import {Cell} from "@/utils/table/Cell";
 import {focusAtom} from "jotai/optics";
+import {atomWithReducer} from "jotai/utils";
 
 type gameAtomType = {
     table:Cell[][],

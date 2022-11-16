@@ -1,14 +1,16 @@
+import React from "react";
 import {GameTable} from "@/components/table/GameTable";
 import {useSetAtom} from "jotai";
 import {GameTableAtom} from "@/globalState/game.atom";
 import {difficultyEnum, generateGame} from "@/utils/generator/generateGame";
+import {useGameActions} from "@/globalState/gameActionHook";
 
 
 function App() {
-    const setGame = useSetAtom(GameTableAtom);
+    const {startGame} = useGameActions()
 
     const onClick = () => {
-        setGame(generateGame(difficultyEnum.easy))
+        startGame()
     }
     return (
       <div className={"grid place-items-center"}>

@@ -1,6 +1,7 @@
 import { Cell } from "@/utils/table/Cell"
-import {useAtom} from "jotai";
+import {useAtom, useAtomValue} from "jotai";
 import {selectedCoordinatesAtom} from "@/globalState/game.atom";
+import {useGameActions} from "@/globalState/gameActionHook";
 
 type CellTableType = {
     cell:Cell
@@ -29,9 +30,11 @@ function getTextColor(cell: Cell, selectedCoordinates: Awaited<{ column: number;
 
 
 export function CellTable({cell}:CellTableType){
-    const [selectedCoordinates,setSelectedCoordinates] = useAtom((selectedCoordinatesAtom))
+    const selectedCoordinates = useAtomValue((selectedCoordinatesAtom));
+    const {setSelectedCell} = useGameActions()
+
     const onClick = () => {
-        setSelectedCoordinates({column:cell.column,row:cell.row})
+        setSelectedCell(cell)
     }
 
     const backGroundColor = getBackgroundColor(cell,selectedCoordinates)
