@@ -1,10 +1,7 @@
 import {useState} from 'react'
 import {difficultyEnum, generateGame} from "./utils/generator/generateGame";
-import {Cell} from "@/utils/table/Cell";
+import {Rows} from "@/components/table/Rows";
 
-function renderRow(row:Cell[]){
-    return row.map(c => <span>{c.value}</span>)
-}
 
 function App() {
   const [count,setCount] = useState(0)
@@ -15,7 +12,7 @@ function App() {
               Hello world!
           </h1>
           <div>
-              {game.map(renderRow)}
+              {game.map((row,rowIndex) => <Rows row={row} key={`key-${rowIndex}`}/>)}
           </div>
         <button onClick={() => setCount(count+1)}>new</button>
       </div>
