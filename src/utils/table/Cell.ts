@@ -10,8 +10,8 @@ export class Cell {
         if (value != ".")
             this.value = Number(value)
         this.solution = Number(solution)
-        this.row = row + 1;
-        this.column = column + 1;
-        this.box = (this.row - 1)*9 + this.column
+        this.row = row;
+        this.column = column;
+        this.box = (this.row)*9 + this.column
     }
 }

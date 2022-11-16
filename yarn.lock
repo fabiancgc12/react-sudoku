@@ -770,6 +770,11 @@ is-number@^7.0.0:
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
 
+jotai@^1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.9.2.tgz#708990083e98b03ba41131a67acdbb681c278510"
+  integrity sha512-/893WrniZwoVc0+3JR056r0FTC/tGbgyHco9dfgde6K8TU6XNxrOSw4jCRdDicncw67A37v2GNGzXSpHKbHPmw==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -851,6 +856,11 @@ object-hash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-3.0.0.tgz#73f97f753e7baffc0e2cc9d6e079079744ac82e9"
   integrity sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==
+
+optics-ts@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/optics-ts/-/optics-ts-2.4.0.tgz#b23d177a76de66fdec9a832eefbd43458a91953e"
+  integrity sha512-BIYgnqOTEf+WiXuxuBFXeoCtyIDOwnUwCMybdQh8qdHyWXunwVVt7iD9XwNq8SCd5vUo9vqgYxF5ati/6inIuQ==
 
 path-parse@^1.0.7:
   version "1.0.7"
