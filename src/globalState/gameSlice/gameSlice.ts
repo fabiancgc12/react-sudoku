@@ -2,28 +2,32 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Cell} from "../../utils/table/Cell";
 import {difficultyEnum, generateGame} from "../../utils/generator/generateGame";
 import {act} from "react-dom/test-utils";
+import { WritableDraft } from "immer/dist/internal";
 
 type gameAtomType = {
-    table:Cell[][],
-    selectedCoordinates:{
-        column:number,
-        row:number
-    }
+    table: Cell[][],
+    selected: Cell
 }
 
-const initialState:gameAtomType = {
+const initialState: gameAtomType = {
     table: [],
-    selectedCoordinates: {
+    selected: {
         column: -1,
-        row: -1
+        row: -1,
+        id: 0,
+        isEditable: false,
+        value: undefined,
+        solution: -1,
+        box: -1
     }
 }
 
-function updateCellValue(table:Cell[][],coordinates: gameAtomType["selectedCoordinates"],value:number|undefined){
-    const selectedCell = table[coordinates.row][coordinates.column];
-    if (selectedCell.isEditable){
+function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
+    const selectedCell = state.table[state.selected.row][state.selected.column];
+    if (selectedCell.isEditable) {
         selectedCell.value = value;
-        table[coordinates.row][coordinates.column] = selectedCell;
+        state.table[state.selected.row][state.selected.column] = selectedCell;
+        state.selected = {...selectedCell}
     }
 }
 
@@ -33,14 +37,13 @@ const gameSlice = createSlice({
     reducers: {
         startGame(state) {
             state.table = generateGame(difficultyEnum.easy);
-            state.selectedCoordinates = initialState.selectedCoordinates;
+            state.selected = initialState.selected;
         },
         setSelectedCell(state,action: PayloadAction<Cell>) {
-            state.selectedCoordinates.row = action.payload.row
-            state.selectedCoordinates.column = action.payload.column
+            state.selected = action.payload
         },
         setCellValue(state,action: PayloadAction<number>){
-            updateCellValue(state.table,state.selectedCoordinates,action.payload)
+            updateCellValue(state, action.payload);
         }
     },
 })

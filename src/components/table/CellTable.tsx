@@ -8,23 +8,39 @@ type CellTableType = {
     cell:Cell
 }
 
-function getBackgroundColor(cell: Cell, selectedCoordinates: Awaited<{ column: number; row: number }>) {
+function getBackgroundColor(cell: Cell, selected: Awaited<Cell>) {
     let resp = "bg-stone-800"
-
-    //checking if its the same cell
-    if (cell.column == selectedCoordinates.column && cell.row == selectedCoordinates.row)
+    const cellHasError = cell.value && cell.value != cell.solution
+    const selectedHasError = selected.value && selected.value != selected.solution
+    const cellIsTheSame = cell.id == selected.id
+    const cellSharesColumnOrRow = cell.column == selected.column || cell.row == selected.row
+    const shareBox = cell.box == selected.box
+    //checking is cell has the incorrect value
+    if (cellHasError){
+        resp = "bg-red-900"
+    }
+    // checking
+    else if (selectedHasError && (cellSharesColumnOrRow || shareBox)){
+        resp = "bg-red-800"
+    }
+    // checking if its the same cell
+    else if (cellIsTheSame){
         resp = "bg-sky-900"
+    }
     // checking if they are in the same row or column
-    else if (cell.column == selectedCoordinates.column || cell.row == selectedCoordinates.row)
-        resp = "bg-sky-700"
+    else if (cellSharesColumnOrRow)
+        resp = "bg-sky-900"
     return resp
 }
 
 function getTextColor(cell: Cell, selectedCoordinates: Awaited<{ column: number; row: number }>) {
     let resp = "text-slate-200"
 
+    if (cell.value && cell.value != cell.solution){
+        resp = "text-red-500"
+    }
     //checking if its the same cell
-    if (cell.column == selectedCoordinates.column || cell.row == selectedCoordinates.row)
+    else if (cell.column == selectedCoordinates.column || cell.row == selectedCoordinates.row)
         resp = "text-cyan-500"
     return resp
 }
@@ -32,14 +48,14 @@ function getTextColor(cell: Cell, selectedCoordinates: Awaited<{ column: number;
 
 export function CellTable({cell}:CellTableType){
     const dispatch = useDispatch()
-    const selectedCoordinates = useAppSelector(selectSelectedCell)
+    const selectedCell = useAppSelector(selectSelectedCell)
 
     const onClick = () => {
         dispatch(setSelectedCell(cell))
     }
 
-    const backGroundColor = getBackgroundColor(cell,selectedCoordinates)
-    const textColor = getTextColor(cell,selectedCoordinates)
+    const backGroundColor = getBackgroundColor(cell,selectedCell)
+    const textColor = getTextColor(cell,selectedCell)
 
     return (
     <span
