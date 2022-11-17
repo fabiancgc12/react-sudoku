@@ -44,9 +44,12 @@ const gameSlice = createSlice({
         },
         setCellValue(state,action: PayloadAction<number>){
             updateCellValue(state, action.payload);
+        },
+        deleteCellValue(state){
+            updateCellValue(state,undefined)
         }
     },
 })
 
-export const { startGame, setSelectedCell, setCellValue } = gameSlice.actions
+export const { startGame, setSelectedCell, setCellValue, deleteCellValue } = gameSlice.actions
 export const gameReducer =  gameSlice.reducer;
