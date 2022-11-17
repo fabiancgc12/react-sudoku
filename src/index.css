@@ -2,11 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@property --countDeg {
+    syntax: '<angle>';
+    inherits: true;
+    initial-value: 0deg;
+}
+
 /*
 Creating styles for the 9x9 boxes
  */
 
-.tableRow:nth-child(1) .tableCell{
+.tableRow:nth-child:first-child .tableCell{
     @apply border-t-2
 }
 
@@ -14,7 +21,7 @@ Creating styles for the 9x9 boxes
     @apply border-b-2
 }
 
-.tableRow .tableCell:nth-child(1){
+.tableRow .tableCell:first-child{
     @apply border-l-2
 }
 
@@ -23,7 +30,8 @@ Creating styles for the 9x9 boxes
 }
 
 .inputValueButton::after{
-    /*background: conic-gradient(*/
-    /*        red 6deg, orange 6deg 200deg);*/
-    background-color: darkblue;
+    transition: --countDeg ease-in .3s;
+    background: conic-gradient(
+            darkblue var(--countDeg), gray var(--countDeg));
+    /*background-color: darkblue;*/
 }

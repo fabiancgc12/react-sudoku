@@ -14,7 +14,7 @@ const initialState: gameAtomType = {
     selected: {
         column: -1,
         row: -1,
-        id: 0,
+        id: -1,
         isEditable: false,
         value: undefined,
         solution: -1,
