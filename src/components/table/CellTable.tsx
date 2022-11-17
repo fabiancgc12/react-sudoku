@@ -33,14 +33,18 @@ function getBackgroundColor(cell: Cell, selected: Awaited<Cell>) {
     return resp
 }
 
-function getTextColor(cell: Cell, selectedCoordinates: Awaited<{ column: number; row: number }>) {
+function getTextColor(cell: Cell, selected: Awaited<Cell>) {
     let resp = "text-slate-200"
 
-    if (cell.value && cell.value != cell.solution){
+    const cellHasError = cell.value && cell.value != cell.solution
+    const selectedHasError = selected.value && selected.value != selected.solution
+    const hasTheSameValue = cell.value == selected.value
+    //checking if there is a error
+    if (cellHasError || (hasTheSameValue && selectedHasError)){
         resp = "text-red-500"
     }
     //checking if its the same cell
-    else if (cell.column == selectedCoordinates.column || cell.row == selectedCoordinates.row)
+    else if (cell.column == selected.column || cell.row == selected.row)
         resp = "text-cyan-500"
     return resp
 }
