@@ -1,7 +1,8 @@
 import { Cell } from "@/utils/table/Cell"
-import {useAtom, useAtomValue} from "jotai";
-import {selectedCoordinatesAtom} from "@/globalState/game.atom";
-import {useGameActions} from "@/globalState/gameActionHook";
+import {useAppSelector} from "@/globalState/appStore";
+import {selectSelectedCell} from "@/globalState/gameSlice/gameSelector";
+import {useDispatch} from "react-redux";
+import { setSelectedCell } from "@/globalState/gameSlice/gameSlice";
 
 type CellTableType = {
     cell:Cell
@@ -30,11 +31,11 @@ function getTextColor(cell: Cell, selectedCoordinates: Awaited<{ column: number;
 
 
 export function CellTable({cell}:CellTableType){
-    const selectedCoordinates = useAtomValue((selectedCoordinatesAtom));
-    const {setSelectedCell} = useGameActions()
+    const dispatch = useDispatch()
+    const selectedCoordinates = useAppSelector(selectSelectedCell)
 
     const onClick = () => {
-        setSelectedCell(cell)
+        dispatch(setSelectedCell(cell))
     }
 
     const backGroundColor = getBackgroundColor(cell,selectedCoordinates)

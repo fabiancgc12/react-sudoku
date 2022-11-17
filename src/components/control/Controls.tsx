@@ -1,11 +1,12 @@
-import React, {useEffect} from "react";
-import {useGameActions} from "@/globalState/gameActionHook";
+import React from "react";
 import {InputControl} from "@/components/control/inputs/InputControls";
+import {useAppDispatch} from "@/globalState/appStore";
+import { startGame } from "@/globalState/gameSlice/gameSlice";
 
 export function Controls(){
-    const {startGame} = useGameActions()
+    const dispatch = useAppDispatch()
     const onClick = () => {
-        startGame()
+        dispatch(startGame())
     }
     return (
         <div className={'w-4/6 mt-4'}>

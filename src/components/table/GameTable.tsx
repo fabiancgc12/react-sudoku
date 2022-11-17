@@ -1,14 +1,14 @@
 import {Rows} from "@/components/table/Rows";
-import {useAtomValue} from "jotai";
-import {GameTableAtom} from "@/globalState/game.atom";
 import {useEffect} from "react";
-import {useGameActions} from "@/globalState/gameActionHook";
+import {useAppDispatch, useAppSelector} from "@/globalState/appStore";
+import {selectGameTable} from "@/globalState/gameSlice/gameSelector";
+import { startGame } from "@/globalState/gameSlice/gameSlice";
 
 export function GameTable(){
-    const gameTable = useAtomValue(GameTableAtom);
-    const {startGame} = useGameActions()
+    const dispatch = useAppDispatch()
+    const gameTable = useAppSelector(selectGameTable)
     useEffect(() => {
-        startGame();
+        dispatch(startGame());
     },[])
     console.log(gameTable)
     return (
