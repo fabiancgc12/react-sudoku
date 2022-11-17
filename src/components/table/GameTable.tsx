@@ -1,15 +1,14 @@
-import {useEffect, useState} from "react";
-import {difficultyEnum, generateGame} from "@/utils/generator/generateGame";
 import {Rows} from "@/components/table/Rows";
-import {useAtom, useAtomValue} from "jotai";
+import {useAtomValue} from "jotai";
 import {GameTableAtom} from "@/globalState/game.atom";
+import {useEffect} from "react";
 import {useGameActions} from "@/globalState/gameActionHook";
 
 export function GameTable(){
     const gameTable = useAtomValue(GameTableAtom);
     const {startGame} = useGameActions()
     useEffect(() => {
-        startGame()
+        startGame();
     },[])
     console.log(gameTable)
     return (
