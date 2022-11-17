@@ -26,6 +26,15 @@ export const selectCountTableValues = createSelector(selectGameTable, (table) =>
     return counts
 })
 
+export const selectPlayerHasWon = createSelector(selectCountTableValues,count =>{
+    if (count.size == 0) return false
+    let resp = true
+    count.forEach(c => {
+        resp = resp && c == 9
+    })
+    return resp
+})
+
 export const selectCountValue = createSelector([
     selectCountTableValues,
     (state:RootState,filter:number) => filter
