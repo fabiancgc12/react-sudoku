@@ -1,4 +1,4 @@
-import {Cell} from "@/utils/table/Cell";
+import {Cell, createCell} from "@/utils/table/Cell";
 
 declare namespace sudoku {
     function generate(dif:difficultyEnum|number): string;
@@ -26,7 +26,7 @@ export function generateGame(difficulty:difficultyEnum|number):Cell[][]{
     table = gameRows.map((r,rowCount) => {
         const row:Cell[] = [];
         for (let columnCount = 0;columnCount < r.length; columnCount++){
-            const cell = new Cell(r[columnCount],solution[rowCount][columnCount],columnCount,rowCount)
+            const cell = createCell(r[columnCount],solution[rowCount][columnCount],columnCount,rowCount)
             row.push(cell)
         }
         return row

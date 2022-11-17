@@ -1,17 +1,25 @@
-export class Cell {
+export interface Cell {
 
-    value?:number = undefined;
+    value?:number;
     solution:number;
     row:number;
     column:number;
-    box:number
+    box:number;
+    isEditable:boolean
+}
 
-    constructor(value:string,solution:string,column:number,row:number) {
-        if (value != ".")
-            this.value = Number(value)
-        this.solution = Number(solution)
-        this.row = row;
-        this.column = column;
-        this.box = (this.row)*9 + this.column
+export function createCell(value:string|number,solution:string|number,column:number,row:number):Cell{
+    let cellValue:number|undefined = undefined
+    if (value != ".")
+        cellValue = Number(value)
+    solution = Number(solution)
+    const box = (row)*9 + column
+    return {
+        value:cellValue,
+        solution,
+        row,
+        column,
+        box,
+        isEditable: value == "."
     }
 }
