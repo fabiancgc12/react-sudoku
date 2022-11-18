@@ -16,7 +16,7 @@ function getBackgroundColor(cell: Cell, selected: Awaited<Cell>) {
     const cellSharesColumnOrRow = cell.column == selected.column || cell.row == selected.row
     const shareBox = cell.box == selected.box
     //checking is cell has the incorrect value
-    if (cellHasError){
+    if (cellIsTheSame && cellHasError){
         resp = "bg-red-900"
     }
     // checking
@@ -44,7 +44,9 @@ function getTextColor(cell: Cell, selected: Awaited<Cell>) {
         resp = "text-red-500"
     }
     //checking if its the same cell
-    else if (cell.column == selected.column || cell.row == selected.row)
+    else if (cell.isEditable && (cell.column == selected.column || cell.row == selected.row))
+        resp = "text-cyan-500"
+    else if (cell.isEditable)
         resp = "text-cyan-500"
     return resp
 }
