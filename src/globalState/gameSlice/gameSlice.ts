@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Cell} from "../../utils/table/Cell";
-import {difficultyEnum, generateGame} from "../../utils/generator/generateGame";
-import {act} from "react-dom/test-utils";
+import {Cell} from "@/utils/table/Cell";
+import {difficultyEnum, generateGame} from "@/utils/generator/generateGame";
 import { WritableDraft } from "immer/dist/internal";
 
 type gameAtomType = {
