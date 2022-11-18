@@ -6,7 +6,8 @@ import { WritableDraft } from "immer/dist/internal";
 
 type gameAtomType = {
     table: Cell[][],
-    selected: Cell
+    selected: Cell,
+    lastMoves:Cell[]
 }
 
 const initialState: gameAtomType = {
@@ -19,16 +20,27 @@ const initialState: gameAtomType = {
         value: undefined,
         solution: -1,
         box: -1
-    }
+    },
+    lastMoves:[]
 }
 
 function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
-    const selectedCell = state.table[state.selected.row][state.selected.column];
-    if (selectedCell.isEditable) {
-        selectedCell.value = value;
-        state.table[state.selected.row][state.selected.column] = selectedCell;
-        state.selected = {...selectedCell}
+    if (state.selected.isEditable) {
+        //i send a copy of state.selected to avoid reference bug
+        pushLastMovesList(state, {...state.selected})
+        state.selected.value = value;
+        state.table[state.selected.row][state.selected.column] = state.selected;
+        // state.selected = {...selectedCell}
     }
+}
+
+function pushLastMovesList(state: WritableDraft<gameAtomType>,cell:Cell){
+    //deleting first element if length == 10
+    if (state.lastMoves.length >= 10){
+        const [,...rest] = state.lastMoves;
+        state.lastMoves = rest;
+    }
+    state.lastMoves.push(cell)
 }
 
 const gameSlice = createSlice({
@@ -47,9 +59,16 @@ const gameSlice = createSlice({
         },
         deleteCellValue(state){
             updateCellValue(state,undefined)
+        },
+        restoreLastMove(state){
+            const lastMove = state.lastMoves.pop();
+            if (lastMove){
+                state.table[lastMove.row][lastMove.column] = {...lastMove};
+                state.selected = {...lastMove}
+            }
         }
     },
 })
 
-export const { startGame, setSelectedCell, setCellValue, deleteCellValue } = gameSlice.actions
+export const { startGame, setSelectedCell, setCellValue, deleteCellValue, restoreLastMove } = gameSlice.actions
 export const gameReducer =  gameSlice.reducer;
