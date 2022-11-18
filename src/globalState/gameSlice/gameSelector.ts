@@ -5,6 +5,7 @@ export const selectGameState = (state:RootState) => state.gameReducer;
 export const selectGameTable = createSelector(selectGameState, (game) => game.table)
 export const selectSelectedCell = createSelector(selectGameState, (game) => game.selected);
 export const selectLastMoves = createSelector(selectGameState, (game) => game.lastMoves);
+export const selectIsOnNotesMode = createSelector(selectGameState, (game) => game.notesMode);
 
 export const selectCountTableValues = createSelector(selectGameTable, (table) => {
     const counts = new Map<number,number>([

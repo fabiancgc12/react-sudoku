@@ -6,7 +6,8 @@ export interface Cell {
     column:number;
     id:number;
     box:number;
-    isEditable:boolean
+    isEditable:boolean;
+    notes:number[]
 }
 
 export function createCell(value:string|number,solution:string|number,column:number,row:number):Cell{
@@ -23,6 +24,7 @@ export function createCell(value:string|number,solution:string|number,column:num
         column,
         id: id,
         isEditable: value == ".",
-        box
+        box,
+        notes: []
     }
 }

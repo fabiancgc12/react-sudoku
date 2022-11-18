@@ -6,7 +6,8 @@ import { WritableDraft } from "immer/dist/internal";
 type gameAtomType = {
     table: Cell[][],
     selected: Cell,
-    lastMoves:Cell[]
+    lastMoves:Cell[],
+    notesMode:boolean
 }
 
 const initialState: gameAtomType = {
@@ -18,21 +19,30 @@ const initialState: gameAtomType = {
         isEditable: false,
         value: undefined,
         solution: -1,
-        box: -1
+        box: -1,
+        notes:[]
     },
-    lastMoves:[]
+    lastMoves:[],
+    notesMode:false
 }
 
 function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
     //checking in case its the initial value
-    if (state.selected.id < 0) return
-    if (state.selected.isEditable) {
+    if (state.selected.id < 0 || !state.selected.isEditable)
+        return
+
+    pushLastMovesList(state, {...state.selected})
+    if (state.notesMode && value){
+        const notes:Set<number> = new Set([...state.selected.notes]);
+        notes.add(value);
+        state.selected.notes = [...notes];
+    } else {
         //i send a copy of state.selected to avoid reference bug
-        pushLastMovesList(state, {...state.selected})
         state.selected.value = value;
-        state.table[state.selected.row][state.selected.column] = state.selected;
-        // state.selected = {...selectedCell}
+        state.selected.notes = [];
     }
+    state.table[state.selected.row][state.selected.column] = state.selected;
+    // state.selected = {...selectedCell}
 }
 
 function pushLastMovesList(state: WritableDraft<gameAtomType>,cell:Cell){
@@ -67,9 +77,12 @@ const gameSlice = createSlice({
                 state.table[lastMove.row][lastMove.column] = {...lastMove};
                 state.selected = {...lastMove}
             }
+        },
+        toggleNotesMode(state){
+           state.notesMode = !state.notesMode
         }
     },
 })
 
-export const { startGame, setSelectedCell, setCellValue, deleteCellValue, restoreLastMove } = gameSlice.actions
+export const { startGame, setSelectedCell, setCellValue, deleteCellValue, restoreLastMove, toggleNotesMode } = gameSlice.actions
 export const gameReducer =  gameSlice.reducer;
