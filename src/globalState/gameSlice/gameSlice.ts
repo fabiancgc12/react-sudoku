@@ -34,7 +34,10 @@ function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undef
     pushLastMovesList(state, {...state.selected})
     if (state.notesMode && value){
         const notes:Set<number> = new Set([...state.selected.notes]);
-        notes.add(value);
+        if (notes.has(value))
+            notes.delete(value)
+        else
+            notes.add(value);
         state.selected.notes = [...notes];
     } else {
         //i send a copy of state.selected to avoid reference bug

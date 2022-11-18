@@ -19,9 +19,10 @@ export function CellTable({cell}:props){
         dispatch(setSelectedCell(cell))
     }
 
+    const baseStyles = "tableCell grid place-items-center cursor-pointer border border-black hover:bg-sky-800 hover:text-cyan-500"
     //checking if cell has notes
     if (cell.notes.length > 0)
-        return <CellNotes cell={cell} selectedCell={selectedCell} onClick={onClick}/>
-    return <CellValue cell={cell} selectedCell={selectedCell} onClick={onClick}/>;
+        return <CellNotes className={baseStyles} cell={cell} selectedCell={selectedCell} onClick={onClick}/>
+    return <CellValue className={baseStyles} cell={cell} selectedCell={selectedCell} onClick={onClick}/>;
 }
 

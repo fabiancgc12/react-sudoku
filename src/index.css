@@ -29,6 +29,48 @@ Creating styles for the 9x9 boxes
     @apply border-r-2
 }
 
+.tableCellNotes{
+    grid-template-areas: "note-1 note-2 note-3"
+                        "note-4 note-5 note-6"
+                        "note-7 note-8 note-9";
+}
+
+.note-1{
+    grid-area: note-1;
+}
+
+.note-2{
+    grid-area: note-2;
+}
+
+.note-3{
+    grid-area: note-3;
+}
+
+.note-4{
+    grid-area: note-4;
+}
+
+.note-5{
+    grid-area: note-5;
+}
+
+.note-6{
+    grid-area: note-6;
+}
+
+.note-7{
+    grid-area: note-7;
+}
+
+.note-8{
+    grid-area: note-8;
+}
+
+.note-9{
+    grid-area: note-9;
+}
+
 .inputValueButton::after{
     transition: --countDeg ease-in .3s;
     background: conic-gradient(

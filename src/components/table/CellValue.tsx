@@ -47,18 +47,19 @@ function getTextColor(cell: Cell, selected: Awaited<Cell>) {
 type props = {
     cell: Cell,
     selectedCell:Cell,
-    onClick: () => void
+    onClick: () => void,
+    className:string
 }
 
-export function CellValue({cell,selectedCell,onClick}:props) {
+export function CellValue({cell,selectedCell,onClick,className}:props) {
     const backGroundColor = getBackgroundColor(cell, selectedCell)
     const textColor = getTextColor(cell, selectedCell)
 
     return (
         <span
             onClick={onClick}
-    className={`tableCell grid place-items-center cursor-pointer font-bold text-xl ${textColor} ${backGroundColor} border border-black
-        hover:bg-sky-800 hover:text-cyan-500`}>
+    className={`${className} font-bold text-xl ${textColor} ${backGroundColor} 
+        `}>
     {cell.value}
     </span>)
 }
