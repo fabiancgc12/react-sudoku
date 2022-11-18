@@ -41,6 +41,8 @@ function getTextColor(cell: Cell, selected: Awaited<Cell>) {
         resp = "text-cyan-500"
     else if (cell.isEditable)
         resp = "text-cyan-500"
+    if (cell.isEditable)
+        resp+=" hover:text-cyan-500"
     return resp
 }
 
