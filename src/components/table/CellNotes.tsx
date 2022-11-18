@@ -1,4 +1,5 @@
 import {Cell} from "@/utils/table/Cell";
+import React from "react";
 
 type props = {
     cell: Cell,
@@ -25,11 +26,12 @@ function getTextColor(cell: Cell, selected: Awaited<Cell>,note:number) {
     let resp = "text-slate-200"
     const selectedHasError = selected.value && selected.value != selected.solution
     const hasTheSameValue = note == selected.value
+    const areTheSameCell = cell.id == selected.id
     //checking if there is a error on selected
     if (hasTheSameValue && selectedHasError){
         resp = "text-red-500"
     }
-    else if (hasTheSameValue)
+    else if (hasTheSameValue || areTheSameCell)
         resp = "text-cyan-500"
     return resp
 }
@@ -40,11 +42,11 @@ export function CellNotes({cell,selectedCell,onClick,className}:props){
     return (
         <div
             onClick={onClick}
-            className={`${className} tableCellNotes grid-cols-3 grid-rows-3 ${backGroundColor} font-bold`}
+            className={`${className} tableCellNotes group grid-cols-3 grid-rows-3 ${backGroundColor} font-bold`}
         >
             {cell.notes.map(n => {
                 const textColor = getTextColor(cell, selectedCell,n)
-                return <span className={`${textColor} text-xs note-${n}`}>{n}</span>
+                return <span className={`${textColor} text-xs note-${n} group-hover:text-cyan-500` }>{n}</span>
             })}
         </div>
     )
