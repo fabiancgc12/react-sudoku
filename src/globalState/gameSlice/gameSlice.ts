@@ -24,6 +24,8 @@ const initialState: gameAtomType = {
 }
 
 function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
+    //checking in case its the initial value
+    if (state.selected.id < 0) return
     if (state.selected.isEditable) {
         //i send a copy of state.selected to avoid reference bug
         pushLastMovesList(state, {...state.selected})
