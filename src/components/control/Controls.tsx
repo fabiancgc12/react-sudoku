@@ -35,14 +35,14 @@ export function Controls(){
                     <MdSettingsBackupRestore size={25} className={"group-hover:fill-yellow-600"}/>
                 </ActionButton>
                 <ActionButton onClick={toggleNotesModeAction} label={"Notes"}>
-                    <NotesModeVG size={25} className={"fill-yellow-600"}/>
+                    <NotesModeSVG size={25} className={"fill-yellow-600"}/>
                 </ActionButton>
             </div>
         </div>
     )
 }
 
-const NotesModeVG:IconType = (props) => {
+const NotesModeSVG:IconType = (props) => {
     const isEditModeOn = useAppSelector(selectIsOnNotesMode)
     if (isEditModeOn) return <AiFillEdit {...props}/>
     else return <AiOutlineEdit {...props} className={`group-hover:${props.className}`} />
