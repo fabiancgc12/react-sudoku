@@ -1,7 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Cell} from "@/utils/table/Cell";
-import {difficultyEnum, generateGame} from "@/utils/generator/generateGame";
+import {DifficultyEnum, generateGame} from "@/utils/generator/generateGame";
 import { WritableDraft } from "immer/dist/internal";
+import {act} from "react-dom/test-utils";
 
 type gameAtomType = {
     table: Cell[][],
@@ -61,8 +62,9 @@ const gameSlice = createSlice({
     name: "gameState",
     initialState,
     reducers: {
-        startGame(state) {
-            state.table = generateGame(difficultyEnum.easy);
+        startGame(state,action: PayloadAction<DifficultyEnum|undefined>) {
+            const difficulty = action.payload ?? DifficultyEnum.easy
+            state.table = generateGame(difficulty);
             state.selected = initialState.selected;
         },
         setSelectedCell(state,action: PayloadAction<Cell>) {
