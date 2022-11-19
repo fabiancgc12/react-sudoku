@@ -25,7 +25,7 @@ export function WinModalMessage(){
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <Dialog.Title as="h3" className="text-lg text-center font-medium leading-6 text-gray-900">
-                            New Game
+                            Victory!
                         </Dialog.Title>
                         <p>
                             You have won the game!
