@@ -8,7 +8,8 @@ export function GameTable(){
     const dispatch = useAppDispatch()
     const gameTable = useAppSelector(selectGameTable)
     useEffect(() => {
-        dispatch(startGame());
+        if (gameTable.length == 0)
+            dispatch(startGame());
     },[])
 
     console.log(gameTable)
