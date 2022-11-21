@@ -1,13 +1,14 @@
 import React, {useEffect, useRef, useState} from "react";
 import {BaseModal} from "@/components/modals/BaseModal";
-import {useSelector} from "react-redux";
-import {selectPlayerHasWon} from "@/globalState/gameSlice/gameSelector";
+import {selectPlayerHasWon, selectTimePlayed} from "@/globalState/gameSlice/gameSelector";
 import {AiOutlineCheck, RiRestartFill} from "react-icons/all";
 import {Dialog} from "@headlessui/react";
+import {useAppSelector} from "@/globalState/appStore";
+import {formatMillisecondsToHours} from "@/utils/format/milisecondsToHour";
 
 export function WinModalMessage(){
     const [isOpen,setIsOpen] = useState(false);
-    const playerHasWon = useSelector(selectPlayerHasWon);
+    const playerHasWon = useAppSelector(selectPlayerHasWon);
     useEffect(() => {
         if (playerHasWon)
             setIsOpen(true)
@@ -30,6 +31,7 @@ export function WinModalMessage(){
                         <p>
                             You have won the game!
                         </p>
+                        <TimeElapsedMessage/>
                     </div>
                 </div>
             </div>
@@ -45,4 +47,14 @@ export function WinModalMessage(){
             </div>
         </div>
     </BaseModal>)
+}
+
+function TimeElapsedMessage(){
+    const timePlayed = useAppSelector(selectTimePlayed);
+    const timeFormat = formatMillisecondsToHours(timePlayed);
+    return (
+        <p>
+            Game lasted: {timeFormat.hours} hours, {timeFormat.minutes} minutes and {timeFormat.seconds} seconds.
+        </p>
+    )
 }

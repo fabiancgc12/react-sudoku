@@ -6,6 +6,7 @@ export const selectGameTable = createSelector(selectGameState, (game) => game.ta
 export const selectSelectedCell = createSelector(selectGameState, (game) => game.selected);
 export const selectLastMoves = createSelector(selectGameState, (game) => game.lastMoves);
 export const selectIsOnNotesMode = createSelector(selectGameState, (game) => game.notesMode);
+export const selectTimePlayed = createSelector(selectGameState, (game) => game.time);
 
 export const selectCountTableValues = createSelector(selectGameTable, (table) => {
     const counts = new Map<number,number>([

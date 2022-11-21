@@ -4,11 +4,21 @@ import {DifficultyEnum, generateGame} from "@/utils/generator/generateGame";
 import { WritableDraft } from "immer/dist/internal";
 import {act} from "react-dom/test-utils";
 
+enum GameState {
+    started,
+    running,
+    stopped,
+    won
+}
+
 type gameAtomType = {
     table: Cell[][],
     selected: Cell,
     lastMoves:Cell[],
-    notesMode:boolean
+    notesMode:boolean,
+    time:number,
+    startedTime:number,
+    gameState: GameState
 }
 
 const initialState: gameAtomType = {
@@ -24,14 +34,19 @@ const initialState: gameAtomType = {
         notes:[]
     },
     lastMoves:[],
-    notesMode:false
+    notesMode:false,
+    time:0,
+    startedTime:0,
+    gameState: GameState.running
 }
 
 function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
     //checking in case its the initial value
     if (state.selected.id < 0 || !state.selected.isEditable)
         return
-
+    // checking if game is stoped
+    if (state.gameState == GameState.stopped || state.gameState == GameState.won)
+        return;
     pushLastMovesList(state, {...state.selected})
     if (state.notesMode && value){
         const notes:Set<number> = new Set([...state.selected.notes]);
@@ -66,6 +81,28 @@ const gameSlice = createSlice({
             const difficulty = action.payload ?? DifficultyEnum.easy
             state.table = generateGame(difficulty);
             state.selected = initialState.selected;
+            state.lastMoves = initialState.lastMoves;
+            state.notesMode = initialState.notesMode;
+            state.time = initialState.time;
+            state.startedTime = new Date().getTime();
+            state.gameState = initialState.gameState
+        },
+        finaliceGame(state){
+            if (state.gameState == GameState.won) return
+            state.time += new Date().getTime() - state.startedTime
+            state.gameState = GameState.won
+        },
+        stopGame(state){
+            //if the game is already won then do nothing
+            if (state.gameState == GameState.won) return
+            state.time += new Date().getTime() - state.startedTime;
+            state.gameState = GameState.stopped
+        },
+        resumeGame(state){
+            //if the game is already won then do nothing
+            if (state.gameState == GameState.won) return
+            state.startedTime = new Date().getTime();
+            state.gameState = GameState.running
         },
         setSelectedCell(state,action: PayloadAction<Cell>) {
             state.selected = action.payload
@@ -77,6 +114,8 @@ const gameSlice = createSlice({
             updateCellValue(state,undefined)
         },
         restoreLastMove(state){
+            //if game is won then do nothing
+            if (state.gameState == GameState.won) return
             const lastMove = state.lastMoves.pop();
             if (lastMove){
                 state.table[lastMove.row][lastMove.column] = {...lastMove};
@@ -89,5 +128,5 @@ const gameSlice = createSlice({
     },
 })
 
-export const { startGame, setSelectedCell, setCellValue, deleteCellValue, restoreLastMove, toggleNotesMode } = gameSlice.actions
+export const { startGame, stopGame, finaliceGame, resumeGame, setSelectedCell, setCellValue, deleteCellValue, restoreLastMove, toggleNotesMode } = gameSlice.actions
 export const gameReducer =  gameSlice.reducer;
