@@ -49,6 +49,9 @@ function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undef
     // checking if game is stoped
     if (state.gameState == GameState.stopped || state.gameState == GameState.won)
         return;
+    // if value is the same dont do nothing
+    if (state.selected.value == value)
+        return;
     pushLastMovesList(state, {...state.selected})
     if (state.notesMode && value){
         const notes:Set<number> = new Set([...state.selected.notes]);
