@@ -18,7 +18,8 @@ type gameAtomType = {
     notesMode:boolean,
     time:number,
     startedTime:number,
-    gameState: GameState
+    gameState: GameState,
+    difficulty:DifficultyEnum
 }
 
 const initialState: gameAtomType = {
@@ -37,7 +38,8 @@ const initialState: gameAtomType = {
     notesMode:false,
     time:0,
     startedTime:0,
-    gameState: GameState.running
+    gameState: GameState.running,
+    difficulty: DifficultyEnum.easy
 }
 
 function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
@@ -80,6 +82,7 @@ const gameSlice = createSlice({
         startGame(state,action: PayloadAction<DifficultyEnum|undefined>) {
             const difficulty = action.payload ?? DifficultyEnum.easy
             state.table = generateGame(difficulty);
+            state.difficulty = difficulty;
             state.selected = initialState.selected;
             state.lastMoves = initialState.lastMoves;
             state.notesMode = initialState.notesMode;
