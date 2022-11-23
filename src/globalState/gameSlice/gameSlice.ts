@@ -43,14 +43,17 @@ const initialState: gameAtomType = {
 }
 
 function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
-    //checking in case its the initial value
+    //checking in case its the initial value or can be edited
     if (state.selected.id < 0 || !state.selected.isEditable)
         return
     // checking if game is stoped
     if (state.gameState == GameState.stopped || state.gameState == GameState.won)
         return;
     // if value is the same dont do nothing
-    if (state.selected.value == value)
+    if (!state.notesMode && state.selected.value == value)
+        return;
+    // if solved then do nothing
+    if (state.selected.value == state.selected.solution)
         return;
     pushLastMovesList(state, {...state.selected})
     if (state.notesMode && value){
@@ -60,6 +63,8 @@ function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undef
         else
             notes.add(value);
         state.selected.notes = [...notes];
+        //reseting value
+        state.selected.value = undefined
     } else {
         //i send a copy of state.selected to avoid reference bug
         state.selected.value = value;
