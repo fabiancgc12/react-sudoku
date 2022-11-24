@@ -6,12 +6,12 @@ declare namespace sudoku {
 }
 
 export enum DifficultyEnum {
-    "easy"=         62,
-    "medium"=       53,
-    "hard"=         44,
-    "very-hard"=   35,
-    "insane"=       26,
-    "inhuman"=      17,
+    easy=         62,
+    medium=       53,
+    hard=         44,
+    veryHard=   35,
+    insane=       26,
+    inhuman=      17,
 }
 
 export function generateGame(difficulty:DifficultyEnum|number):Cell[][]{

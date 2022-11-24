@@ -11,7 +11,9 @@ enum GameState {
     won
 }
 
-type gameAtomType = {
+type GameStory = Pick<gameType,"time">
+
+type gameType = {
     table: Cell[][],
     selected: Cell,
     lastMoves:Cell[],
@@ -19,10 +21,11 @@ type gameAtomType = {
     time:number,
     startedTime:number,
     gameState: GameState,
-    difficulty:DifficultyEnum
+    difficulty:keyof typeof DifficultyEnum,
+    gameStories:Record<keyof typeof DifficultyEnum, GameStory[]>
 }
 
-const initialState: gameAtomType = {
+const initialState: gameType = {
     table: [],
     selected: {
         column: -1,
@@ -39,10 +42,18 @@ const initialState: gameAtomType = {
     time:0,
     startedTime:0,
     gameState: GameState.running,
-    difficulty: DifficultyEnum.easy
+    difficulty: "easy",
+    gameStories:{
+        easy:[],
+        medium:[],
+        hard:[],
+        veryHard:[],
+        insane:[],
+        inhuman:[],
+    }
 }
 
-function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undefined) {
+function updateCellValue(state: WritableDraft<gameType>, value: number|undefined) {
     //checking in case its the initial value or can be edited
     if (state.selected.id < 0 || !state.selected.isEditable)
         return
@@ -74,7 +85,7 @@ function updateCellValue(state: WritableDraft<gameAtomType>, value: number|undef
     // state.selected = {...selectedCell}
 }
 
-function pushLastMovesList(state: WritableDraft<gameAtomType>,cell:Cell){
+function pushLastMovesList(state: WritableDraft<gameType>, cell:Cell){
     //deleting first element if length == 10
     if (state.lastMoves.length >= 10){
         const [,...rest] = state.lastMoves;
@@ -87,10 +98,11 @@ const gameSlice = createSlice({
     name: "gameState",
     initialState,
     reducers: {
-        startGame(state,action: PayloadAction<DifficultyEnum|undefined>) {
-            const difficulty = action.payload ?? DifficultyEnum.easy
-            state.table = generateGame(difficulty);
+        startGame(state,action: PayloadAction<keyof typeof DifficultyEnum|undefined>) {
+            const difficulty = action.payload ?? state.difficulty
+            state.table = generateGame(80);
             state.difficulty = difficulty;
+            console.log({difficulty})
             state.selected = initialState.selected;
             state.lastMoves = initialState.lastMoves;
             state.notesMode = initialState.notesMode;
@@ -101,7 +113,10 @@ const gameSlice = createSlice({
         finaliceGame(state){
             if (state.gameState == GameState.won) return
             state.time += new Date().getTime() - state.startedTime
-            state.gameState = GameState.won
+            state.gameState = GameState.won;
+            state.gameStories[state.difficulty].push({
+                time:state.time
+            })
         },
         stopGame(state){
             //if the game is already won then do nothing
