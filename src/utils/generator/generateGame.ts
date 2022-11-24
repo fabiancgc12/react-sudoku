@@ -1,7 +1,7 @@
 import {Cell, createCell} from "@/utils/table/Cell";
 
 declare namespace sudoku {
-    function generate(dif:DifficultyEnum|number): string;
+    function generate(dif:DifficultyEnum|number | keyof typeof DifficultyEnum): string;
     function solve(board:string): string;
 }
 
@@ -14,7 +14,7 @@ export enum DifficultyEnum {
     inhuman=      17,
 }
 
-export function generateGame(difficulty:DifficultyEnum|number):Cell[][]{
+export function generateGame(difficulty:DifficultyEnum|number | keyof typeof DifficultyEnum):Cell[][]{
     const game = sudoku.generate(difficulty);
     const solution = sudoku.solve(game).match(/.{1,9}/g) as string[];
     //split the game string into segemnts of 9 digits

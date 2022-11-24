@@ -100,7 +100,7 @@ const gameSlice = createSlice({
     reducers: {
         startGame(state,action: PayloadAction<keyof typeof DifficultyEnum|undefined>) {
             const difficulty = action.payload ?? state.difficulty
-            state.table = generateGame(80);
+            state.table = generateGame(difficulty);
             state.difficulty = difficulty;
             console.log({difficulty})
             state.selected = initialState.selected;
