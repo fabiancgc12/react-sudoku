@@ -19,7 +19,8 @@
     "paths": {
       "@/utils/*": ["utils/*"],
       "@/components/*": ["components/*"],
-      "@/globalState/*": ["globalState/*"]
+      "@/globalState/*": ["globalState/*"],
+      "@/pages/*": ["pages/*"]
     }
   },
   "include": ["src"],

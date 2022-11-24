@@ -6,6 +6,7 @@ import {AppStore} from "@/globalState/appStore";
 import {WinModalMessage} from "@/components/modals/WinModalMessage";
 import {persistStore} from "redux-persist";
 import {PersistGate} from "redux-persist/integration/react";
+import {Shell} from "@/components/layout/shell";
 
 const persist = persistStore(AppStore)
 
@@ -13,11 +14,13 @@ function App() {
     return (
     <Provider store={AppStore}>
         <PersistGate loading={null} persistor={persist}>
-            <div className={"grid place-items-center"}>
-                <GameTable/>
-                <Controls/>
-                <WinModalMessage/>
-            </div>
+            <Shell>
+                <div className={"grid place-items-center"}>
+                    <GameTable/>
+                    <Controls/>
+                    <WinModalMessage/>
+                </div>
+            </Shell>
         </PersistGate>
     </Provider>
     )
