@@ -28,7 +28,7 @@ export function GameTable(){
     },[])
 
     return (
-        <div className={"grid place-items-center w-2/6 aspect-square grid-rows-9"}>
+        <div className={"grid place-items-center w-full md:w-2/3 lg:w-5/6 xl:w-2/5  aspect-square grid-rows-9"}>
             {gameTable.map((row,rowIndex) => <Rows row={row} key={`row-${rowIndex}`}/>)}
         </div>
     )

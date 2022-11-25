@@ -29,9 +29,9 @@ export function Controls() {
         dispatch(toggleNotesMode())
     }
     return (
-        <div className={'w-4/6 mt-4'}>
+        <div className={'w-full md:w-4/6 mt-4'}>
             <InputControl/>
-            <div className={"mt-4 grid place-items-center grid-cols-4"}>
+            <div className={"mt-4 grid place-items-stretch gap-3 sm:place-items-center grid-cols-4"}>
                 <CreateGameAction/>
                 <ActionButton onClick={deleteMove} label={"Delete"}>
                     <BsFillEraserFill size={25} className={"group-hover:fill-yellow-600"}/>
@@ -58,6 +58,7 @@ function CreateGameAction() {
     const [selected, setSelected] = useState(DifficultyEnum.easy)
     const dispatch = useAppDispatch()
     const startGameAction = () => {
+        // @ts-ignore
         dispatch(startGame(selected))
         setIsModalOpen(false)
     }

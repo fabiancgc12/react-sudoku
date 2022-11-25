@@ -9,13 +9,13 @@ type props = {
 
 export function Shell({children}:props) {
     return (
-        <div className="flex flex-col flex-no-wrap sm:flex-row">
+        <div className="flex flex-col flex-no-wrap flex-col-reverse md:flex-row min-h-screen justify-between">
             <div
-                className="w-full sm:w-64 sm:h-screen absolute sm:relative bg-gray-800 shadow sm:flex sm:flex-col justify-between
+                className="w-full md:w-44 md:h-screen relative bg-gray-800 shadow md:sticky md:top-0  md:flex md:flex-col justify-between
                             inset-x-0 bottom-0"
             >
-                <div className="px-8">
-                    <ul className="sm:mt-8 justify-between flex sm:flex-col gap-3">
+                <div className="">
+                    <ul className="md:mt-8 justify-between flex md:flex-col gap-3">
                         <NavItem icon={<FaGamepad/>} label={"game"} url={""}/>
                         <NavItem icon={<IoIosStats/>} label={"stats"} url={"stats"}/>
                         <NavItem icon={<SiAboutdotme/>} label={"about"} url={"about"}/>
@@ -24,7 +24,7 @@ export function Shell({children}:props) {
             </div>
             {/* Sidebar ends */}
             {/* Remove class [ h-64 ] when adding a card block */}
-            <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
+            <div className="container mx-auto pt-6 mb-5 sm:mb-0 md:py-4 md:w-4/5 w-11/12">
                 {children}
             </div>
         </div>
@@ -42,7 +42,7 @@ function NavItem({icon,label,url}:navItemsProp){
         <NavLink to={url} className={({ isActive }) =>
             isActive ? "basis-full bg-cyan-900 rounded text-white" : "basis-full rounded text-gray-600 hover:bg-gray-700 hover:text-gray-500"
         }>
-            <li className="flex w-full justify-center sm:justify-between p-2 cursor-pointer items-center">
+            <li className="flex w-full justify-center md:justify-between p-2 cursor-pointer items-center">
                 <div className="flex items-center">
                     {icon}
                     <span className="text-base capitalize ml-2">{label}</span>
