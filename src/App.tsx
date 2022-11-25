@@ -7,6 +7,10 @@ import {WinModalMessage} from "@/components/modals/WinModalMessage";
 import {persistStore} from "redux-persist";
 import {PersistGate} from "redux-persist/integration/react";
 import {Shell} from "@/components/layout/shell";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {GamePage} from "@/pages/gamePage/GamePage";
+import {AboutPage} from "@/pages/aboutPage/AboutPage";
+import {StatsPage} from "@/pages/statsPage/StatsPage";
 
 const persist = persistStore(AppStore)
 
@@ -14,13 +18,15 @@ function App() {
     return (
     <Provider store={AppStore}>
         <PersistGate loading={null} persistor={persist}>
-            <Shell>
-                <div className={"grid place-items-center"}>
-                    <GameTable/>
-                    <Controls/>
-                    <WinModalMessage/>
-                </div>
-            </Shell>
+            <BrowserRouter>
+                <Shell>
+                    <Routes>
+                        <Route path="/" element={ <GamePage/> } />
+                        <Route path="/about" element={ <AboutPage/> } />
+                        <Route path="/stats" element={ <StatsPage/> } />
+                    </Routes>
+                </Shell>
+            </BrowserRouter>
         </PersistGate>
     </Provider>
     )
