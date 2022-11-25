@@ -40,9 +40,9 @@ type navItemsProp = {
 function NavItem({icon,label,url}:navItemsProp){
     return (
         <NavLink to={url} className={({ isActive }) =>
-            isActive ? "basis-full bg-cyan-900 rounded text-white" : "basis-full text-gray-600 hover:bg-gray-700 hover:text-gray-500"
+            isActive ? "basis-full bg-cyan-900 rounded text-white" : "basis-full rounded text-gray-600 hover:bg-gray-700 hover:text-gray-500"
         }>
-            <li className="flex w-full justify-center sm:justify-between p-2 rounded cursor-pointer items-center">
+            <li className="flex w-full justify-center sm:justify-between p-2 cursor-pointer items-center">
                 <div className="flex items-center">
                     {icon}
                     <span className="text-base capitalize ml-2">{label}</span>
