@@ -14,6 +14,9 @@ export enum DifficultyEnum {
     inhuman=      17,
 }
 
+// @ts-ignore
+export const dificultyKeys = Object.keys(DifficultyEnum).map(key => DifficultyEnum[key]).filter(value => typeof value === 'string') as string[];
+
 export function generateGame(difficulty:DifficultyEnum|number | keyof typeof DifficultyEnum):Cell[][]{
     const game = sudoku.generate(difficulty);
     const solution = sudoku.solve(game).match(/.{1,9}/g) as string[];

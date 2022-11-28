@@ -19,13 +19,15 @@ function App() {
     <Provider store={AppStore}>
         <PersistGate loading={null} persistor={persist}>
             <BrowserRouter>
-                <Shell>
-                    <Routes>
-                        <Route path="/" element={ <GamePage/> } />
-                        <Route path="/about" element={ <AboutPage/> } />
-                        <Route path="/stats" element={ <StatsPage/> } />
-                    </Routes>
-                </Shell>
+                <div className="">
+                    <Shell>
+                        <Routes>
+                            <Route path="/" element={ <GamePage/> } />
+                            <Route path="/about" element={ <AboutPage/> } />
+                            <Route path="/stats" element={ <StatsPage/> } />
+                        </Routes>
+                    </Shell>
+                </div>
             </BrowserRouter>
         </PersistGate>
     </Provider>

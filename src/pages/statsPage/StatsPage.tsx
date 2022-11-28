@@ -1,12 +1,10 @@
-import {GameTable} from "@/components/table/GameTable";
-import {Controls} from "@/components/control/Controls";
-import {WinModalMessage} from "@/components/modals/WinModalMessage";
 import React from "react";
+import {Stats} from "@/components/stats/stats";
 
 export function StatsPage(){
     return (
-        <div className={"grid place-items-center"}>
-            stats
+        <div className={""}>
+            <Stats/>
         </div>
     )
 }

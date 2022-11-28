@@ -24,7 +24,7 @@ export function Shell({children}:props) {
             </div>
             {/* Sidebar ends */}
             {/* Remove class [ h-64 ] when adding a card block */}
-            <div className="container mx-auto pt-6 mb-5 sm:mb-0 md:py-4 md:w-4/5 w-11/12">
+            <div className="container bg-zinc-900 z-10 basis-full w-full pt-6 px-4 pb-5 sm:mb-0 md:py-4 md:w-4/5">
                 {children}
             </div>
         </div>

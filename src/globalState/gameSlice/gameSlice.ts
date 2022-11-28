@@ -11,7 +11,7 @@ enum GameState {
     won
 }
 
-type GameStory = Pick<gameType,"time">
+export type GameStory = Pick<gameType,"time">
 
 type gameType = {
     table: Cell[][],
@@ -102,7 +102,6 @@ const gameSlice = createSlice({
             const difficulty = action.payload ?? state.difficulty
             state.table = generateGame(difficulty);
             state.difficulty = difficulty;
-            console.log({difficulty})
             state.selected = initialState.selected;
             state.lastMoves = initialState.lastMoves;
             state.notesMode = initialState.notesMode;

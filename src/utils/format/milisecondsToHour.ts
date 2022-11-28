@@ -1,4 +1,5 @@
 export function formatMillisecondsToHours(ms:number){
+    console.log(ms)
     let seconds = Math.floor(ms / 1000);
     let minutes = Math.floor(seconds / 60);
     let hours = Math.floor(minutes / 60);
