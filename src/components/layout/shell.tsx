@@ -17,7 +17,7 @@ export function Shell({children}:props) {
             >
                 <NavBar/>
             </div>
-            <div className="isolate container bg-zinc-900 z-10 basis-full w-full pt-6 px-4 pb-12 md:pb-5 sm:mb-0 md:py-4 md:w-4/5">
+            <div className="isolate bg-zinc-900 z-10 basis-full w-full pt-6 px-4 pb-12 md:pb-5 sm:mb-0 md:py-4 md:w-4/5">
                 {children}
             </div>
         </div>
