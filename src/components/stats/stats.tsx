@@ -8,7 +8,7 @@ type props = {}
 export function Stats({}:props) {
     const gameStories = useAppSelector(selectGameStory)
    return (
-       <div className={"flex flex-col"}>
+       <div className={"flex flex-col gap-3"}>
            {Object.entries(gameStories).map(([diff,diffStories]) => <Stat key={`diffifulty-${diff}`} diff={diff} stories={diffStories}/>)}
        </div>
    )
