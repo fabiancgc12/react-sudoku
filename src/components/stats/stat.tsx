@@ -41,6 +41,7 @@ export function Stat({diff,stories}:props){
 }
 
 function formatTime(ms:number){
+    if (ms == 0) return <span className={"line-through text-zinc-900"}>Not played</span>
     let {seconds,minutes} = formatMillisecondsToMinutes(ms)
     const minutesPad = minutes.toString().padStart(2,"0")
     const secondsPad = seconds.toString().padStart(2,"0")
