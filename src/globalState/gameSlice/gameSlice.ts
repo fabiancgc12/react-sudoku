@@ -138,6 +138,10 @@ const gameSlice = createSlice({
         setCellValue(state,action: PayloadAction<number>){
             updateCellValue(state, action.payload);
         },
+        giveATip(state){
+            updateCellValue(state, state.selected.solution);
+        }
+        ,
         deleteCellValue(state){
             updateCellValue(state,undefined)
         },
@@ -156,5 +160,5 @@ const gameSlice = createSlice({
     },
 })
 
-export const { startGame, stopGame, finaliceGame, resumeGame, setSelectedCell, setCellValue, deleteCellValue, restoreLastMove, toggleNotesMode } = gameSlice.actions
+export const { startGame, stopGame, finaliceGame, resumeGame, setSelectedCell, giveATip, setCellValue, deleteCellValue, restoreLastMove, toggleNotesMode } = gameSlice.actions
 export const gameReducer =  gameSlice.reducer;

@@ -1,14 +1,14 @@
 import React, {Fragment, useRef, useState} from "react";
 import {InputControl} from "@/components/control/inputs/InputControls";
 import {useAppDispatch, useAppSelector} from "@/globalState/appStore";
-import {deleteCellValue, restoreLastMove, startGame, toggleNotesMode} from "@/globalState/gameSlice/gameSlice";
+import {deleteCellValue, restoreLastMove, startGame, toggleNotesMode,giveATip} from "@/globalState/gameSlice/gameSlice";
 import {ActionButton} from "@/components/control/actions/ActionButton";
 import {
     AiFillEdit,
     AiOutlineCheck,
     AiOutlineEdit,
     BsFillEraserFill, HiChevronUpDown,
-    MdSettingsBackupRestore,
+    MdSettingsBackupRestore, MdTipsAndUpdates,
     RiRestartFill
 } from "react-icons/all";
 import {selectIsOnNotesMode} from "@/globalState/gameSlice/gameSelector";
@@ -28,16 +28,24 @@ export function Controls() {
     const toggleNotesModeAction = () => {
         dispatch(toggleNotesMode())
     }
+
+    const giveATipAction = () => {
+        dispatch(giveATip())
+    }
+
     return (
         <div className={'w-full md:w-4/6 mt-4'}>
             <InputControl/>
-            <div className={"mt-4 grid place-items-stretch gap-3 sm:place-items-center grid-cols-4"}>
+            <div className={"mt-4 grid place-items-stretch gap-3 sm:place-items-center grid-cols-5"}>
                 <CreateGameAction/>
                 <ActionButton onClick={deleteMove} label={"Delete"}>
                     <BsFillEraserFill size={25} className={"group-hover:fill-yellow-600"}/>
                 </ActionButton>
                 <ActionButton onClick={restoreMove} label={"Restore"}>
                     <MdSettingsBackupRestore size={25} className={"group-hover:fill-yellow-600"}/>
+                </ActionButton>
+                <ActionButton onClick={giveATipAction} label={"Tip"}>
+                    <MdTipsAndUpdates size={25} className={"group-hover:fill-yellow-600"}/>
                 </ActionButton>
                 <ActionButton onClick={toggleNotesModeAction} label={"Notes"}>
                     <NotesModeSVG size={25} className={"fill-yellow-600"}/>
