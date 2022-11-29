@@ -7,7 +7,7 @@ export function AboutPage(){
             <section className="w-full md:w-1/3 min-w-fit max-w-lg flex flex-col gap-2">
                 <DataLabel label={"Made by"} info={"Fabian Graterol"}/>
                 <DataLabel label={"Github"} info={
-                    <a href="https://github.com/fabiancgc12" target="blank">fabiancgc12</a>
+                    <a href="https://github.com/fabiancgc12" target="blank">Fabiancgc12</a>
                 }/>
                 <DataLabel label={"Made with"} info="React, typescript, RTK and Tailwind"/>
                 <DataLabel label={"Credits to"} info={
