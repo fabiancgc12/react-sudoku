@@ -46,7 +46,7 @@ export function CellNotes({cell,selectedCell,onClick,className}:props){
         >
             {cell.notes.map(n => {
                 const textColor = getTextColor(cell, selectedCell,n)
-                return <span className={`${textColor} text-xs note-${n} group-hover:text-cyan-500` }>{n}</span>
+                return <span key={`cell-${cell.id}-note-${n}`} className={`${textColor} text-xs note-${n} group-hover:text-cyan-500` }>{n}</span>
             })}
         </div>
     )
