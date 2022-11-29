@@ -13,7 +13,7 @@ export function AboutPage(){
                 <DataLabel label={"Credits to"} info={
                     <span>
                         <a href="https://github.com/robatron/sudoku.js" target="_blank">github.com/robatron</a>
-                        <p>For the library that generates de sudoku table and its solution</p>
+                        <p>For the library and algorithm that generates de sudoku table and its solution</p>
                     </span>
                 }/>
             </section>
