@@ -113,7 +113,10 @@ const gameSlice = createSlice({
             if (state.gameState == GameState.won) return
             state.time += new Date().getTime() - state.startedTime
             state.gameState = GameState.won;
-            state.gameStories[state.difficulty].push({
+            let diff = state.difficulty
+            if (typeof diff == "number")
+                diff = DifficultyEnum[diff] as typeof state.difficulty
+            state.gameStories[diff].push({
                 time:state.time
             })
         },
