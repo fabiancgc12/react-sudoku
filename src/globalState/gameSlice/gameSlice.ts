@@ -66,7 +66,7 @@ function updateCellValue(state: WritableDraft<gameType>, value: number|undefined
     // if solved then do nothing
     if (state.selected.value == state.selected.solution)
         return;
-    pushLastMovesList(state, {...state.selected})
+    pushLastMovesList(state, state.selected)
     if (state.notesMode && value){
         const notes:Set<number> = new Set([...state.selected.notes]);
         if (notes.has(value))
@@ -86,6 +86,7 @@ function updateCellValue(state: WritableDraft<gameType>, value: number|undefined
 }
 
 function pushLastMovesList(state: WritableDraft<gameType>, cell:Cell){
+    cell = {...cell,notes:[...cell.notes]}
     //deleting first element if length == 10
     if (state.lastMoves.length >= 10){
         const [,...rest] = state.lastMoves;
