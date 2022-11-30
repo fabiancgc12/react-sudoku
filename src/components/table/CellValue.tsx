@@ -8,7 +8,8 @@ function getBackgroundColor(cell: Cell, selected: Awaited<Cell>) {
     const cellIsTheSame = cell.id == selected.id
     const cellSharesColumnOrRow = cell.column == selected.column || cell.row == selected.row
     const shareBox = cell.box == selected.box
-    const hasTheSameValue = cell.value == selected.value
+    //checing if its not undefinied and share value
+    const hasTheSameValue = cell.value && cell.value == selected.value
 
     //styles if its the same cell has the selected one
     if (cellIsTheSame){
