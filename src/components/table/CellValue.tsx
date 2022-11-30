@@ -25,7 +25,7 @@ function getBackgroundColor(cell: Cell, selected: Awaited<Cell>) {
     else if (hasTheSameValue){
         resp = "bg-sky-800"
     }
-
+    resp+=" hover:bg-sky-800"
     return resp
 }
 
