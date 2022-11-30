@@ -1,14 +1,13 @@
 import {Cell} from "@/utils/table/Cell";
 
 function getBackgroundColor(cell: Cell, selected: Awaited<Cell>) {
-
-    let resp = "bg-stone-800" // defaullt bg for cells
+    let resp = "bg-stone-800" // default bg for cells
     const cellHasError = cell.value && cell.value != cell.solution
     const selectedHasError = selected.value && selected.value != selected.solution
     const cellIsTheSame = cell.id == selected.id
     const cellSharesColumnOrRow = cell.column == selected.column || cell.row == selected.row
     const shareBox = cell.box == selected.box
-    //checing if its not undefinied and share value
+    //checking if its not undefined and share value
     const hasTheSameValue = cell.value && cell.value == selected.value
 
     //styles if its the same cell has the selected one
