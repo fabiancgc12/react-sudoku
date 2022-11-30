@@ -11,7 +11,7 @@ type props = {
 function getBackgroundColor(cell: Cell, selected: Awaited<Cell>,) {
     let resp = "bg-stone-800"
     const cellIsTheSame = cell.id == selected.id
-    const cellSharesColumnOrRow = cell.column == selected.column || cell.row == selected.row
+    const cellSharesColumnOrRow = cell.column == selected.column || cell.row == selected.row || cell.box == selected.box
     // checking if its the same cell
     if (cellIsTheSame){
         resp = "bg-sky-900"
@@ -19,6 +19,7 @@ function getBackgroundColor(cell: Cell, selected: Awaited<Cell>,) {
     // checking if they are in the same row or column
     else if (cellSharesColumnOrRow)
         resp = "bg-stone-700"
+    resp+=" hover:bg-sky-800"
     return resp
 }
 
