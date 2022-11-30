@@ -31,24 +31,15 @@ function getBackgroundColor(cell: Cell, selected: Awaited<Cell>) {
 
 function getTextColor(cell: Cell, selected: Awaited<Cell>) {
     let resp = "text-slate-200"
-
+    if (!cell.isEditable)
+        return resp
     const cellHasError = cell.value && cell.value != cell.solution
-    const selectedHasError = selected.value && selected.value != selected.solution
-    const hasTheSameValue = cell.value == selected.value
-    const cellIsTheSame = cell.id == selected.id
     //checking if there is a error
-    if (cellHasError || (hasTheSameValue && selectedHasError)){
+    resp = "text-cyan-300"
+    if (cellHasError)
         resp = "text-red-500"
-    }
     //checking if same value but not same cell
-    else if (hasTheSameValue && !cellIsTheSame)
-        resp = "text-cyan-600"
-    else if (cell.isEditable && (cell.column == selected.column || cell.row == selected.row))
-        resp = "text-cyan-300"
-    else if (cell.isEditable)
-        resp = "text-cyan-300"
-    if (cell.isEditable)
-        resp+=" hover:text-cyan-200"
+    resp+=" hover:text-cyan-200"
     return resp
 }
 
