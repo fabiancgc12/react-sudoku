@@ -18,7 +18,7 @@ function getBackgroundColor(cell: Cell, selected: Awaited<Cell>,) {
     }
     // checking if they are in the same row or column
     else if (cellSharesColumnOrRow)
-        resp = "bg-sky-900"
+        resp = "bg-stone-700"
     return resp
 }
 
